@@ -59,8 +59,6 @@ fi
 mkdir -p /vendor/lib64/hw/
 
 cp /s/system/lib64/android.hidl.base@1.0.so /sbin/
-cp /s/system/lib64/libicuuc.so /sbin/
-cp /s/system/lib64/libxml2.so /sbin/
 
 relink /v/bin/qseecomd
 

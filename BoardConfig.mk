@@ -117,3 +117,7 @@ RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
 TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT}/system/lib64/android.hardware.boot@1.0.so
 TW_USE_TOOLBOX := true
+
+# Add logcat support
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true

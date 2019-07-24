@@ -26,10 +26,7 @@
 #
 
 # the DIAG device node is not world writable/readable.
-/dev/diag                 0660   system     qcom_diag
-/dev/ttydiag0             0660   system     qcom_diag
-/dev/ttydiag1             0660   system     qcom_diag
-/dev/ttydiag2             0660   system     qcom_diag
+/dev/diag                 0660   system     oem_2901
 
 /dev/genlock              0666   system     system
 /dev/wlan                 0660   wifi       wifi
@@ -118,7 +115,6 @@
 /dev/at_usb0              0640   radio      radio
 /dev/at_mdm0              0640   radio      radio
 /dev/video*               0660   system     camera
-/dev/v4l2-hal-ctrl        0660   system     camera
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
@@ -241,7 +237,6 @@
 /sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   input
 /sys/devices/virtual/input/input*                   set_delay_ms     0660  system   input
 /sys/devices/virtual/input/input*                   do_flush         0660  system   input
-/dev/laser                0660   system     camera
 
 # vm_bms
 /dev/vm_bms               0660   system     system
@@ -256,6 +251,7 @@
 # wigig
 /sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/fst_link_loss 0660 wifi wifi
 /sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/thermal_throttling 0660 system system
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/snr_thresh 0660 wifi wifi
 /sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/queues/rx-0/rps_cpus 0660 system system
 /sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/gro_flush_timeout 0660 system system
 /sys/devices/virtual/net/bond0 queues/rx-0/rps_cpus 0660 system system
@@ -273,6 +269,9 @@
 # SSR devices
 /dev/subsys_*         0640   system     system
 
+# Ultrasound device
+/dev/usf1                 0660   system     system
+
 # Ramdump devices
 /dev/ramdump*             0640   system     system
 
@@ -284,79 +283,15 @@
 /dev/hbtp_vm              0660   system     system
 
 # Add device block for FRP
-/dev/block/bootdevice/by-name/frp       0600   system     system
+/dev/block/platform/soc/7824900.sdhci/by-name/config    0600   system     system
+/dev/block/platform/soc/7464900.sdhci/by-name/frp       0600   system     system
+/dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
+/dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
+/dev/block/platform/soc/c0c4000.sdhci/by-name/frp       0600   system     system
+/dev/block/platform/soc/1d84000.ufshc/by-name/frp       0600   system     system
+
+# Add device block for FRP with soc.0
+/dev/block/platform/soc.0/7824900.sdhci/by-name/config    0600   system     system
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system
-
-# I2C
-/dev/i2c-*                0660   system     system
-
-#JOT fixture devices for AMPS factory testing
-/dev/hidraw0              0660   root       mot_tcmd
-/dev/hidraw1              0660   root       mot_tcmd
-
-# MOD device
-/sys/devices/soc/75b5000.i2c/i2c-7/7-0072 irq_enable 0660 mot_tcmd mot_tcmd
-/sys/devices/soc/0.apba_ctrl apba_enable 0660 mot_tcmd mot_mod
-/sys/devices/soc/0.apba_ctrl apba_mode 0660 mot_tcmd mot_mod
-/sys/devices/soc/0.apba_ctrl flash_partition 0220 mot_tcmd mot_mod
-/sys/devices/soc/0.apba_ctrl unipro_mid 0440 root mot_mod
-/sys/devices/soc/0.apba_ctrl unipro_pid 0440 root mot_mod
-/sys/devices/soc/0.apba_ctrl vid 0440 root mot_mod
-/sys/devices/soc/0.apba_ctrl pid 0440 root mot_mod
-/sys/devices/soc/0.apba_ctrl fw_version 0440 root mot_mod
-/sys/devices/soc/0.apba_ctrl fw_version_str 0440 root mot_mod
-/sys/devices/soc/soc:muc_svc@0/mods_interfaces/* hotplug 0660 root mot_mod
-/sys/devices/soc/soc:muc_svc@0/mods_interfaces/* uevent 0660 root mot_mod
-/sys/devices/soc/soc:muc_svc@0/mods_interfaces/* current_limit 0220 root mot_mod
-/sys/devices/soc/soc:muc_svc@0/mods_interfaces/* rtc_sync 0220 root mot_mod
-/sys/devices/soc/soc:muc_svc@0 flashmode 0660 root mot_mod
-/sys/devices/soc/soc:muc_svc@0 reset 0660 root mot_mod
-/sys/devices/soc/0.muc/0.muc:muc_svc@0/mods_interfaces/* hotplug 0660 root mot_mod
-/sys/devices/soc/0.muc/0.muc:muc_svc@0/mods_interfaces/* uevent 0660 root mot_mod
-/sys/devices/soc/0.muc/0.muc:muc_svc@0 flashmode 0660 root mot_mod
-/sys/devices/platform/mods_ap uevent 0660 root mot_mod
-/sys/devices/platform/mods_ap/* uevent 0660 root mot_mod
-/sys/devices/platform/mods_ap/greybus1 uevent 0664 root mot_mod
-
-# MOD display device
-/sys/devices/platform/mods_ap/greybus1/*/*/display/display* state 0660 root mot_mod
-/sys/devices/platform/mods_ap/greybus1/*/*/display/display* config 0444 root mot_mod
-/sys/devices/platform/mods_ap/greybus1/*/*/display/display* notification 0660 root mot_mod
-
-# MOD light device
-/sys/devices/platform/mods_ap/greybus1/*/*/leds/mod_light*::backlight brightness 0660 root mot_mod
-
-# IIO (dynamic sensors)
-/sys/devices/iio_sysfs_trigger/add_trigger          0220    system      system
-/sys/devices/iio_sysfs_trigger/remove_trigger       0220    system      system
-
-/sys/devices/iio:device* buffer/*                   0664    system      system
-/sys/devices/iio:device* scan_elements/in_*_en      0664    system      system
-/sys/devices/iio:device* trigger/current_trigger    0664    system      system
-/sys/devices/iio:device* in_sampling_frequency      0664    system      system
-/sys/devices/iio:device* max_latency_ns             0664    system      system
-/sys/devices/iio:device* flush                      0220    system      system
-
-/dev/iio:device*                                    0600    system      system
-
-# RAW device
-/dev/gbraw*             0660   root   mot_mod
-# Audio device
-/sys/devices/platform/mods_codec.0 uevent 0660 root mot_mod
-/sys/devices/platform/mods_codec.0/* uevent 0660 root mot_mod
-
-# MOD camera device
-/dev/mot_camera_ext*               0660   system     camera
-/sys/devices/virtual/video4linux/mot_camera_ext* open_mode 0660 system camera
-/sys/devices/virtual/video4linux/mot_camera_ext* uevent 0660 root mot_mod
-/sys/devices/virtual/video4linux/video* open_mode 0660 system camera
-/sys/devices/virtual/video4linux/video* uevent 0660 root mot_mod
-
-# Trustonic TEE device
-/dev/mobicore             0600   system     system
-/dev/mobicore-user        0666   system     system
-
-# DTV
-/dev/isdbt     0660   mot_dtv   mot_dtv
