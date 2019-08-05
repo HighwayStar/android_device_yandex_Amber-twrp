@@ -59,6 +59,11 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
+#
+
+PRODUCT_PACKAGES += \
+     libgptutils
+
 # Update engine
 PRODUCT_PACKAGES += \
     update_engine \
@@ -70,6 +75,9 @@ PRODUCT_PACKAGES_DEBUG += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.keystore=sdm660
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2019-02-05
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_PLATFORM := sdm660

@@ -40,8 +40,9 @@ TARGET_USES_UEFI := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
-PLATFORM_SECURITY_PATCH := 2019-02-05
 TARGET_HW_DISK_ENCRYPTION := true
+PLATFORM_SECURITY_PATCH := 2019-07-05
+
 
 # Enable CPUSets
 ENABLE_CPUSETS := true
@@ -52,7 +53,7 @@ BOARD_PROVIDES_GPTUTILS := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=1 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3
-#BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
 BOARD_KERNEL_CMDLINE += skip_override androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
@@ -60,17 +61,17 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
+#TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
 
-#BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
-#TARGET_KERNEL_ARCH := arm64
-#TARGET_KERNEL_HEADER_ARCH := arm64
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
-#TARGET_KERNEL_SOURCE := kernel/yandex/sdm660
-#TARGET_KERNEL_CONFIG := sdm660-perf_defconfig
-#TARGET_KERNEL_VERSION := 4.4
+TARGET_KERNEL_SOURCE := kernel/yandex/sdm660
+TARGET_KERNEL_CONFIG := sdm660-perf_defconfig
+TARGET_KERNEL_VERSION := 4.4
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
@@ -115,7 +116,6 @@ TW_NO_SCREEN_BLANK := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT}/system/lib64/android.hardware.boot@1.0.so
 TW_USE_TOOLBOX := true
 
 # Add logcat support
